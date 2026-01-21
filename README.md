@@ -77,7 +77,7 @@ function submitForm() {
         class: document.getElementById("class").value
     };
 
-    fetch("PASTE_YOUR_WEB_APP_URL_HERE", {
+    fetch("https://script.google.com/macros/s/AKfycbwnwq32RYtaNZHgjxsYLC_G6gkZ3mIpchpfATXFhXu-GH5Fsvljj7iOf06C4hV_rBW_/exec", {
         method: "POST",
         body: JSON.stringify(data)
     })
