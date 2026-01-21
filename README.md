@@ -49,22 +49,29 @@
         <input type="text" id="name" placeholder="Enter Name" required>
         <input type="text" id="class" placeholder="Enter Class" required>
         <button type="submit">Submit</button>
-    </form>
-</div>
-
-<script>
+    <script>
     function submitForm() {
         let roll = document.getElementById("roll").value;
         let name = document.getElementById("name").value;
         let cls = document.getElementById("class").value;
 
-        alert(
-            "Form Submitted Successfully!\n\n" +
-            "Roll No: " + roll + "\n" +
-            "Name: " + name + "\n" +
-            "Class: " + cls
-        );
+        fetch("https://script.google.com/macros/s/AKfycbwnwq32RYtaNZHgjxsYLC_G6gkZ3mIpchpfATXFhXu-GH5Fsvljj7iOf06C4hV_rBW_/exec", {
+            method: "POST",
+            body: JSON.stringify({
+                roll: roll,
+                name: name,
+                class: cls
+            })
+        })
+        .then(() => {
+            alert("Data Google Sheet me save ho gaya ✅");
+        })
+        .catch(() => {
+            alert("Error: Data save nahi hua ❌");
+        });
     }
+</script>
+
 </script>
 
 </body>
