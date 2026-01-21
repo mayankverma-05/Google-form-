@@ -1,53 +1,71 @@
 # Google-form-
-Asking for name , class , roll no to students:- 
-/**
- * Creates a Google Form for student information:
- * - Full Name (short answer, required)
- * - Class (short answer, required)
- * - Roll Number (short answer, required; numeric range validation)
- *
- * After running, check the Apps Script Logs (View → Logs) for the form URLs.
- */
-function createStudentForm() {
-  // Create the form
-  var form = FormApp.create('Student Information Form')
-    .setDescription('Please fill in your details. This form collects student name, class and roll number.');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Details Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+        }
+        .form-box {
+            width: 350px;
+            margin: 80px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        h2 {
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #4285f4;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #3367d6;
+        }
+    </style>
+</head>
+<body>
 
-  // Full Name (required)
-  form.addTextItem()
-    .setTitle('Full Name')
-    .setHelpText('Enter your full name')
-    .setRequired(true);
+<div class="form-box">
+    <h2>Student Details</h2>
 
-  // Class (required)
-  form.addTextItem()
-    .setTitle('Class')
-    .setHelpText('e.g., Grade 10 / 12A / Year 9')
-    .setRequired(true);
+    <form onsubmit="submitForm(); return false;">
+        <input type="number" id="roll" placeholder="Enter Roll Number" required>
+        <input type="text" id="name" placeholder="Enter Name" required>
+        <input type="text" id="class" placeholder="Enter Class" required>
+        <button type="submit">Submit</button>
+    </form>
+</div>
 
-  // Roll Number (required) with numeric validation (0..999999)
-  var rollItem = form.addTextItem()
-    .setTitle('Roll Number')
-    .setHelpText('Enter your roll number (digits only)')
-    .setRequired(true);
+<script>
+    function submitForm() {
+        let roll = document.getElementById("roll").value;
+        let name = document.getElementById("name").value;
+        let cls = document.getElementById("class").value;
 
-  var rollValidation = FormApp.createTextValidation()
-    .requireNumberBetween(0, 999999)
-    .setHelpText('Please enter a numeric roll number (digits only).')
-    .build();
+        alert(
+            "Form Submitted Successfully!\n\n" +
+            "Roll No: " + roll + "\n" +
+            "Name: " + name + "\n" +
+            "Class: " + cls
+        );
+    }
+</script>
 
-  rollItem.setValidation(rollValidation);
-
-  // Optional: customize confirmation message
-  form.setConfirmationMessage('Thanks — your response has been recorded.');
-
-  // Log the form URLs
-  Logger.log('Form URL (for respondents): ' + form.getPublishedUrl());
-  Logger.log('Form Edit URL (for owner): ' + form.getEditUrl());
-
-  // Also return the URLs for immediate use when called from another script
-  return {
-    publishedUrl: form.getPublishedUrl(),
-    editUrl: form.getEditUrl()
-  };
-}
+</body>
+</html>
