@@ -69,3 +69,19 @@
 
 </body>
 </html>
+<script>
+function submitForm() {
+    const data = {
+        roll: document.getElementById("roll").value,
+        name: document.getElementById("name").value,
+        class: document.getElementById("class").value
+    };
+
+    fetch("PASTE_YOUR_WEB_APP_URL_HERE", {
+        method: "POST",
+        body: JSON.stringify(data)
+    })
+    .then(res => alert("Data saved successfully!"))
+    .catch(err => alert("Error saving data"));
+}
+</script>
